@@ -15,17 +15,18 @@ const quotes = require("./quotes.json");
 //   /quotes            - Should return all quotes (json)
 //   /quotes/random     - Should return ONE quote (json)
 app.get("/", function (request, response) {
-  response.send("<h1>Hello there! welcome to my quote server Api</h1>");
+  response.send("Hello there! welcome to my quote server Api");
 });
 
 //START OF YOUR CODE...
 app.get("/quotes", function (request, response) {
-  response.send(quotes);
+  response.json(quotes);
 });
 
 app.get("/quotes/random", function (request, response) {
-  const randomQuote = quotes[lodash.random(quotes.length - 1)];
-  response.send(randomQuote);
+  // const randomQuote = quotes[lodash.random(quotes.length - 1)];
+  // response.send(randomQuote);
+  response.json(pickFromArray(quotes))
 });
 
 app.get(`/quotes/search`, function (request, response) {
@@ -50,9 +51,9 @@ app.get("/echo", function (request, response) {
 //example: pickFromArray(myContactsArray)
 //
 
-// function pickFromArray(arr) {
-//   return arr[Math.floor(Math.random() * arr.length)];
-// }
+function pickFromArray(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
 //Start our server so that it listens for HTTP requests!
 const listener = app.listen(process.env.PORT || 3000, "localhost", function () {
